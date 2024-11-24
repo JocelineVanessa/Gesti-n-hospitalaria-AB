@@ -1,4 +1,4 @@
-﻿# CMakeList.txt: proyecto de CMake para gestionHospitalaria-AB-JR, incluya el origen y defina
+﻿# CMakeList.txt: proyecto de CMake para CMakeProject3, incluya el origen y defina
 # la lógica específica del proyecto aquí.
 #
 cmake_minimum_required (VERSION 3.8)
@@ -9,13 +9,13 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("gestionHospitalaria-AB-JR")
+project ("CMakeProject3")
 
 # Agregue un origen al ejecutable de este proyecto.
-add_executable (gestionHospitalaria-AB-JR "gestionHospitalaria-AB-JR.cpp" "gestionHospitalaria-AB-JR.h")
+add_executable (CMakeProject3 "Gestion-hospitalaria-JR.cpp" "Gestion-hospilaraia-JR.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET gestionHospitalaria-AB-JR PROPERTY CXX_STANDARD 20)
+  set_property(TARGET CMakeProject3 PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Agregue pruebas y destinos de instalación si es necesario.
