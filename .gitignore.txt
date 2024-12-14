@@ -1,0 +1,15 @@
+*.ninja
+*.ninja_deps
+*.ninja_log
+build.ninja
+CMakeCache.txt
+CMakeFiles/
+Testing/
+*.dir/
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.log
+*.tmp
+*.vs/
