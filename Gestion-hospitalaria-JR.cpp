@@ -180,36 +180,34 @@ public:
         cout << "Ingrese el DNI del medico a eliminar: ";
         cin >> dni;
 
-        ifstream inputFile("medicos.csv");
-        ofstream tempFile("temp.csv");
+        fstream file("medicos.csv", ios::in | ios::out);
+        if (!file.is_open()) {
+            cerr << "Error al abrir el archivo.\n";
+            return;
+        }
 
-        if (inputFile.is_open() && tempFile.is_open()) {
-            string linea;
-            bool encontrado = false;
-            while (getline(inputFile, linea)) {
-                if (linea.find(dni) == string::npos) {
-                    tempFile << linea << "\n";
-                }
-                else {
-                    encontrado = true;
-                }
-            }
-            inputFile.close();
-            tempFile.close();
+        string linea;
+        streampos lastPos = file.tellg(); 
+        bool encontrado = false;
 
-            remove("medicos.csv");
-            rename("temp.csv", "medicos.csv");
+        while (getline(file, linea)) {
+            if (linea.find(dni) != string::npos) {
+                encontrado = true;
+                break;
+            }
+            lastPos = file.tellg(); 
+        }
 
-            if (encontrado) {
-                cout << "Medico eliminado exitosamente.\n";
-            }
-            else {
-                cout << "Medico no encontrado.\n";
-            }
+        if (encontrado) {
+            file.seekp(lastPos); 
+            file << string(linea.length(), ' '); 
+            cout << "Medico eliminado exitosamente.\n";
         }
         else {
-            cerr << "Error al abrir el archivo para eliminar el medico.\n";
+            cout << "Medico no encontrado.\n";
         }
+
+        file.close();
     }
 
     static void MostrarMedicos() {
@@ -295,7 +293,7 @@ int main() {
                 cout << "3. Crear medico\n";
                 cout << "4. Mostrar lista de medicos\n";
                 cout << "5. Guardar y salir\n";
-                cout << "6. Eliminar medico\n"; 
+                cout << "6. Eliminar medico\n";
                 cout << "Ingrese su opcion: ";
                 cin >> opcion;
 
@@ -324,8 +322,8 @@ int main() {
                 else {
                     cout << "Opcion no valida.\n";
                 }
-              
-            } 
+
+            }
         }
         else {
             cout << "No tiene permisos para realizar esta accion.\n";
